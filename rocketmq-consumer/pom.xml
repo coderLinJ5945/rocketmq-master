@@ -10,18 +10,27 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>rocketmq-consumer</artifactId>
-    <packaging>war</packaging>
-
-    <name>rocketmq-consumer Maven Webapp</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <packaging>jar</packaging>
+    <name>rocketmq-consumer</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <rocketmq.version>4.0.0-incubating</rocketmq.version>
     </properties>
-
+    <!--继承SpringBoot项目的默认依赖信息-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.0.3.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -29,17 +38,44 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
+
+        <!--Spring boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- rocketmq start -->
+        <!--RMQ 工具包-->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-tools</artifactId>
+            <version>${rocketmq.version}</version>
+        </dependency>
+        <!-- RMQ 服务器包 -->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-namesrv</artifactId>
+            <version>${rocketmq.version}</version>
+        </dependency>
+        <!-- RMQ 代理包 -->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-broker</artifactId>
+            <version>${rocketmq.version}</version>
+        </dependency>
+        <!-- rocketmq end -->
     </dependencies>
 
     <build>
         <finalName>rocketmq-consumer</finalName>
-        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+        <!--pluginManagement 锁定插件版本以避免使用Maven缺省值(可能会转移到父pom)-->
+        <pluginManagement>
             <plugins>
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
-                <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.0.2</version>
@@ -66,5 +102,12 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <!--maven 打包Spring boot jar-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 </project>
