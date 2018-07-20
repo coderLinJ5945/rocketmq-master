@@ -1,0 +1,30 @@
+[
+  {
+    "consumerType": 0,
+    "consumerGroup": "testConsumerGroupTest2",
+    "subscription": [
+      {
+        "topic": "message_test",
+        "subExpression": "o_message"
+      },
+      {
+        "topic": "handler_message_test",
+        "subExpression": "m_message"
+      },
+      {
+        "topic": "topic_test",
+        "subExpression": "m_message"
+      }
+    ]
+  },
+  {
+    "consumerType": 0,
+    "consumerGroup": "testConsumerGroupTest1",
+    "subscription": [
+      {
+        "topic": "topic_test",
+        "subExpression": "m_message"
+      }
+    ]
+  }
+]
